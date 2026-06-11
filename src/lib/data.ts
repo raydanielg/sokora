@@ -1,0 +1,88 @@
+import type { Product, Account, Supplier, Customer } from './types'
+
+export const PRODUCTS: Product[] = [
+  { id:'1', sku:'MK-001', name:'Breast Pump — Elite', category:'Feeding', cost:95000, price:185000, qty:4, reorder:10 },
+  { id:'2', sku:'MK-002', name:'Belly Binder — Large', category:'Postpartum', cost:35000, price:68000, qty:8, reorder:15 },
+  { id:'3', sku:'MK-003', name:'U-Shape Pregnancy Pillow', category:'Comfort', cost:75000, price:145000, qty:24, reorder:10 },
+  { id:'4', sku:'MK-004', name:'Nipple Cream — 60ml', category:'Feeding', cost:22000, price:42000, qty:11, reorder:20 },
+  { id:'5', sku:'MK-005', name:'Scar Sheet za SOKORA', category:'Postpartum', cost:45000, price:85000, qty:31, reorder:10 },
+  { id:'6', sku:'MK-006', name:'PeaceTouch Belly Binder', category:'Postpartum', cost:55000, price:105000, qty:18, reorder:12 },
+  { id:'7', sku:'MK-007', name:'Folic Acid Supplements', category:'Supplements', cost:8000, price:18000, qty:45, reorder:20 },
+  { id:'8', sku:'MK-008', name:'DHA Omega-3 Capsules', category:'Supplements', cost:22000, price:45000, qty:28, reorder:15 },
+]
+
+export const ACCOUNTS: Account[] = [
+  { id:'a1', code:'1010', name:'Cash — DSM HQ Till', type:'asset', category:'Cash & Bank', balance:3450000 },
+  { id:'a2', code:'1020', name:'M-Pesa — Business Account', type:'asset', category:'Cash & Bank', balance:780000 },
+  { id:'a3', code:'1030', name:'CRDB Bank — TZS Operating', type:'asset', category:'Cash & Bank', balance:12200000 },
+  { id:'a4', code:'1031', name:'CRDB Bank — USD Account', type:'asset', category:'Cash & Bank', balance:2100000 },
+  { id:'a5', code:'1040', name:'Petty Cash — DSM HQ', type:'asset', category:'Cash & Bank', balance:150000 },
+  { id:'a6', code:'1050', name:'Accounts Receivable — B2B', type:'asset', category:'Receivables', balance:320000 },
+  { id:'a7', code:'1051', name:'Accounts Receivable — Crown', type:'asset', category:'Receivables', balance:85000 },
+  { id:'a8', code:'1110', name:'Inventory — Maternity Products', type:'asset', category:'Inventory', balance:18400000 },
+  { id:'a9', code:'1111', name:'Inventory — Supplements', type:'asset', category:'Inventory', balance:2100000 },
+  { id:'a10', code:'1112', name:'Inventory — Skincare', type:'asset', category:'Inventory', balance:980000 },
+  { id:'a11', code:'1121', name:'GRN Interim / Expected Cost', type:'asset', category:'Inventory', balance:0 },
+  { id:'a12', code:'2010', name:'Accounts Payable — Import Suppliers', type:'liability', category:'Payables', balance:-2100000 },
+  { id:'a13', code:'2011', name:'Accounts Payable — Local Suppliers', type:'liability', category:'Payables', balance:-340000 },
+  { id:'a15', code:'2030', name:'PAYE Payable', type:'liability', category:'Payroll Tax', balance:-120000 },
+  { id:'a16', code:'2050', name:'Deferred Revenue — Konnect', type:'liability', category:'Deferred Revenue', balance:-180000 },
+  { id:'a17', code:'2060', name:'Crown Points Liability', type:'liability', category:'Other', balance:-45000 },
+  { id:'a18', code:'3010', name:'Owner Capital — Joe Gembe', type:'equity', category:'Equity', balance:-5000000 },
+  { id:'a19', code:'3011', name:'Owner Capital — Jane Mwatonoka', type:'equity', category:'Equity', balance:-5000000 },
+  { id:'a20', code:'3020', name:'Retained Earnings', type:'equity', category:'Equity', balance:-8200000 },
+  { id:'a21', code:'4010', name:'Sales — Maternity Products B2C', type:'revenue', category:'Revenue', balance:-4250000 },
+  { id:'a22', code:'4011', name:'Sales — Maternity Products B2B', type:'revenue', category:'Revenue', balance:-980000 },
+  { id:'a23', code:'4020', name:'Sales — Supplements', type:'revenue', category:'Revenue', balance:-340000 },
+  { id:'a24', code:'4110', name:'Konnect Subscription Revenue', type:'revenue', category:'Revenue', balance:-180000 },
+  { id:'a25', code:'5010', name:'COGS — Maternity Products', type:'cogs', category:'COGS', balance:1680000 },
+  { id:'a26', code:'5020', name:'COGS — Supplements', type:'cogs', category:'COGS', balance:145000 },
+  { id:'a27', code:'5050', name:'Import Duties & Customs', type:'cogs', category:'COGS', balance:320000 },
+  { id:'a28', code:'5060', name:'Freight & Shipping Inward', type:'cogs', category:'COGS', balance:180000 },
+  { id:'a29', code:'5080', name:'Inventory Write-off / Damage', type:'cogs', category:'COGS', balance:0 },
+  { id:'a30', code:'6010', name:'Salaries — Full-Time Staff', type:'expense', category:'People', balance:450000 },
+  { id:'a31', code:'6110', name:'Rent — DSM HQ Office', type:'expense', category:'Premises', balance:180000 },
+  { id:'a32', code:'6210', name:'Social Media Advertising', type:'expense', category:'Marketing', balance:55000 },
+  { id:'a33', code:'6310', name:'Software Subscriptions (SaaS)', type:'expense', category:'Technology', balance:32000 },
+  { id:'a34', code:'6312', name:'WhatsApp / Twilio API Costs', type:'expense', category:'Technology', balance:18000 },
+  { id:'a35', code:'6410', name:'Delivery — Last Mile DSM', type:'expense', category:'Logistics', balance:65000 },
+  { id:'a36', code:'6512', name:'Bank Charges & Transfer Fees', type:'expense', category:'Admin', balance:18000 },
+  { id:'a37', code:'7010', name:'FX Gain — Realised', type:'other', category:'FX', balance:0 },
+  { id:'a38', code:'7011', name:'FX Loss — Realised', type:'other', category:'FX', balance:0 },
+]
+
+export const SUPPLIERS: Supplier[] = [
+  { id:'s1', name:'Meditech International', currency:'USD', balance:2100000 },
+  { id:'s2', name:'PharmaCare Global', currency:'USD', balance:980000 },
+  { id:'s3', name:'Meditech Tanzania (Local)', currency:'TZS', balance:340000 },
+  { id:'s4', name:'PharmaCare Ltd Tanzania', currency:'TZS', balance:120000 },
+]
+
+export const CUSTOMERS: Record<string, Customer> = {
+  '255712345678': { name:'Amina Hassan', stage:'28 wks pregnant', last:'Breast pump · TZS 185,000 · 2 days ago', ai:' She may need a belly binder or hospital bag kit soon', points:1850 },
+  '255758221043': { name:'Grace Mwanza', stage:'6 wks postpartum', last:'Nipple cream · TZS 95,000 · 1 week ago', ai:' Recommend Scar Sheet za SOKORA at this stage', points:950 },
+  '255743100212': { name:'Fatuma Iddi', stage:'34 wks pregnant', last:'Pregnancy pillow · TZS 145,000 · 5 days ago', ai:' Hospital bag kit or breast pump next', points:1450 },
+}
+
+export const BREADCRUMBS: Record<string, string> = {
+  'dashboard':'Dashboard', 'vouchers':'Vouchers', 'chart-of-accounts':'Chart of Accounts',
+  'banks':'Banks & Cash', 'inventory':'Inventory', 'reports':'Reports',
+  'sales':'Cash Sale', 'cash-sale':'Cash Sale', 'cash-payment':'Payment Voucher',
+  'bank-receipt':'Cash Receipt', 'bank-transfer':'Bank Transfer', 'petty-cash':'Petty Cash',
+  'contra':'Contra Entry', 'sales-invoice':'Sales Invoice', 'proforma':'Proforma Invoice', 'sales-return':'Sales Return',
+  'debit-note':'Debit Note', 'credit-note':'Credit Note',
+  'purchase-order':'Purchase Order', 'grn':'GRN', 'purchase-invoice':'Purchase Invoice',
+  'purchase-return':'Purchase Return', 'opening-stock':'Opening Stock',
+  'stock-adjustment':'Stock Adjustment', 'stock-transfer':'Stock Transfer',
+  'journal-entry':'Journal Entry',
+  'pnl':'Profit & Loss', 'sales-register':'Sales Register', 'sales-day-book':'Sales Day Book',
+  'trial-balance':'Trial Balance', 'balance-sheet':'Balance Sheet',
+  'ar-aging':'AR Aging', 'ap-aging':'AP Aging',
+  'stock-valuation':'Stock Valuation', 'purchase-register':'Purchase Register',
+  'payment-register':'Payment Register', 'expense-register':'Expense Register', 'stock-transfer-register':'Stock Transfer Register', 'import-register':'Import Register', 'customers':'Customers', 'receipt-template':'Receipt Template', 'invoice-template':'Invoice Template', 'whatsapp-settings':'WhatsApp', 'location-settings':'Location Management', 'inventory-settings':'Inventory Settings', 'pricelist-template':'Price List',
+  'settings':'Settings', 'data-import':'Data Import Studio', 'coming-soon':'Coming Soon',
+  'bundles':'Product Bundles', 'suppliers':'Suppliers', 'investors-hub':'Investors Hub',
+  'import-order':'Import Orders',
+  'stock-transfer-request':'Stock Transfer Request',
+  'stock-transfer-approvals':'Transfer Request Approvals',
+}
