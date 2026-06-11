@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "2.47.0",
+    "@supabase/supabase-js": "2.108.1",
     "geist": "^1.7.2",
     "jspdf": "^2.5.2",
     "react": "^19.0.0",
