@@ -160,6 +160,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
   const [announcementVisible, setAnnouncementVisible] = useState(true)
   const [scrolled, setScrolled] = useState(false)
   const [activeFeature, setActiveFeature] = useState<number | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -198,6 +199,10 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           from { opacity: 0; transform: translateY(24px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        @keyframes slideInRight {
+          from { opacity: 0; transform: translateX(100%); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
         .hero-fade { animation: fadeUp .7s ease both; }
         .hero-fade-2 { animation: fadeUp .7s ease .15s both; }
         .hero-fade-3 { animation: fadeUp .7s ease .3s both; }
@@ -208,16 +213,21 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
         .plan-card { transition: all .2s; }
         .plan-card:hover { transform: translateY(-4px); }
         .step-num { font-size: 13px; font-weight: 800; color: ${C.indigo}; font-family: 'Geist Mono', monospace; letter-spacing: -.5px; }
-        .scroll-indicator { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; animation: fadeUp 1s ease .8s both; }
+        .scroll-indicator { display: flex; flex-direction: column, align-items: center; gap: 4px; cursor: pointer; animation: fadeUp 1s ease .8s both; }
         .scroll-indicator:hover .scroll-arrow { transform: translateY(3px); }
         .scroll-arrow { transition: transform .2s; }
         .toast-enter { animation: slideDown .4s ease; }
+        .mobile-menu-overlay { animation: slideInRight .3s ease; }
+        .hamburger-btn { display: none; }
+        .mobile-menu-panel { display: none; }
+        .mobile-menu-panel.open { display: flex !important; }
         @media (max-width: 768px) {
           .feat-grid  { grid-template-columns: 1fr !important; }
           .plan-grid  { grid-template-columns: 1fr !important; }
           .stats-grid { grid-template-columns: 1fr 1fr !important; }
           .nav-links-desktop { display: none !important; }
-          .nav-links-mobile { display: flex !important; }
+          .nav-links-mobile { display: none !important; }
+          .hamburger-btn { display: flex !important; }
           .hero-headline { font-size: 42px !important; letter-spacing: -1.5px !important; }
           .hero-subheadline { font-size: 16px !important; }
           .dashboard-mockup { display: none !important; }
@@ -309,6 +319,26 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
             <span className="nav-link" style={{ fontSize: 13 }}>Pricing</span>
           </nav>
 
+          {/* Hamburger button - mobile only */}
+          <button
+            className="hamburger-btn"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{
+              display: 'none',
+              flexDirection: 'column',
+              gap: 4,
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: 8,
+              borderRadius: 4,
+            }}
+          >
+            <span style={{ width: 20, height: 2, background: C.text, borderRadius: 1, transition: 'all .2s' }} />
+            <span style={{ width: 20, height: 2, background: C.text, borderRadius: 1, transition: 'all .2s' }} />
+            <span style={{ width: 20, height: 2, background: C.text, borderRadius: 1, transition: 'all .2s' }} />
+          </button>
+
           {/* CTAs */}
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <button style={btn('ghost', 'sm')} onClick={onSignIn}
@@ -326,6 +356,100 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           </div>
         </div>
       </header>
+
+      {/* ──────────────────────────────────────────────────────────────
+          MOBILE MENU PANEL
+      ────────────────────────────────────────────────────────────── */}
+      {mobileMenuOpen && (
+        <>
+          <div
+            className="mobile-menu-overlay"
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0,0,0,0.5)',
+              zIndex: 200,
+            }}
+            onClick={() => setMobileMenuOpen(false)}
+          />
+          <div
+            className={`mobile-menu-panel mobile-menu-overlay ${mobileMenuOpen ? 'open' : ''}`}
+            style={{
+              position: 'fixed',
+              top: 0,
+              right: 0,
+              width: '280px',
+              height: '100%',
+              background: C.bg,
+              zIndex: 201,
+              boxShadow: '-4px 0 24px rgba(0,0,0,0.15)',
+              flexDirection: 'column',
+              padding: '24px 20px',
+            }}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                alignSelf: 'flex-end',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 8,
+                borderRadius: 4,
+                marginBottom: 24,
+              }}
+            >
+              <Icon n="x" s={20} c={C.text} />
+            </button>
+
+            {/* Logo */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 9, marginBottom: 32, paddingBottom: 24, borderBottom: `1px solid ${C.border}` }}>
+              <img src="/icons/icons8-logo-50 (1).png" alt="SOKORA Logo" style={{ width: 32, height: 32, borderRadius: 8 }} />
+              <span style={{ fontSize: 18, fontWeight: 800, color: C.text, letterSpacing: '-0.4px' }}>SOKORA</span>
+            </div>
+
+            {/* Navigation links */}
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 32 }}>
+              {['Product', 'Features', 'Pricing', 'Docs'].map(link => (
+                <span
+                  key={link}
+                  className="nav-link"
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 500,
+                    color: C.text,
+                    padding: '12px 16px',
+                    borderRadius: 8,
+                    transition: 'all .15s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = C.bgAlt }}
+                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link}
+                </span>
+              ))}
+            </nav>
+
+            {/* CTA buttons */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginTop: 'auto' }}>
+              <button
+                style={btn('outline', 'md')}
+                onClick={() => { setMobileMenuOpen(false); onSignIn() }}
+              >
+                Sign in
+              </button>
+              <button
+                style={btn('primary', 'md')}
+                onClick={() => { setMobileMenuOpen(false); onGetStarted() }}
+              >
+                Get started free
+              </button>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* ──────────────────────────────────────────────────────────────
           HERO SECTION
