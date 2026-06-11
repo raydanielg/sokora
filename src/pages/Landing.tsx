@@ -216,6 +216,28 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           .feat-grid  { grid-template-columns: 1fr !important; }
           .plan-grid  { grid-template-columns: 1fr !important; }
           .stats-grid { grid-template-columns: 1fr 1fr !important; }
+          .nav-links-desktop { display: none !important; }
+          .nav-links-mobile { display: flex !important; }
+          .hero-headline { font-size: 42px !important; letter-spacing: -1.5px !important; }
+          .hero-subheadline { font-size: 16px !important; }
+          .dashboard-mockup { display: none !important; }
+          .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+          .trusted-by-scroll { overflow-x: auto !important; flex-wrap: nowrap !important; padding-bottom: 8px !important; }
+          .trusted-by-scroll::-webkit-scrollbar { height: 4px; }
+          .trusted-by-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+          .responsive-header { padding: 0 20px !important; }
+          .hero-section { padding: 60px 20px 0 !important; }
+          .section-padding { padding: 60px 20px !important; }
+          .cta-buttons { flex-direction: column !important; width: 100% !important; }
+          .cta-buttons button { width: 100% !important; }
+        }
+        @media (max-width: 480px) {
+          .hero-headline { font-size: 32px !important; letter-spacing: -1px !important; }
+          .hero-subheadline { font-size: 14px !important; }
+          .stats-grid { grid-template-columns: 1fr !important; }
+          .responsive-header { padding: 0 16px !important; }
+          .hero-section { padding: 40px 16px 0 !important; }
+          .section-padding { padding: 40px 16px !important; }
         }
       `}</style>
 
@@ -259,28 +281,27 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
         borderBottom: `1px solid ${scrolled ? C.border : 'transparent'}`,
         transition: 'all .2s',
         padding: '0 40px',
-      }}>
+      }} className="responsive-header">
         <div style={{ maxWidth: 1200, margin: '0 auto', height: 62, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {/* Logo */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 9, cursor: 'pointer', userSelect: 'none' }}>
-            <div style={{ width: 32, height: 32, background: C.indigo, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(99,102,241,0.3)' }}>
-              <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
-                <path d="M10 26C10 22 13 20 17 20C21 20 23 18 23 14" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
-                <path d="M17 20C21 20 24 22 27 24C30 26 30 30 27 30" stroke="rgba(255,255,255,0.65)" strokeWidth="3.5" strokeLinecap="round"/>
-                <circle cx="10" cy="26" r="2.5" fill="white"/>
-                <circle cx="27" cy="30" r="2.5" fill="rgba(255,255,255,0.65)"/>
-                <circle cx="23" cy="14" r="2.5" fill="white"/>
-              </svg>
-            </div>
+            <img src="/icons/icons8-logo-50 (1).png" alt="SOKORA Logo" style={{ width: 32, height: 32, borderRadius: 8, boxShadow: '0 2px 8px rgba(99,102,241,0.3)' }} />
             <span style={{ fontSize: 17, fontWeight: 800, color: C.text, letterSpacing: '-0.4px' }}>SOKORA</span>
           </div>
 
-          {/* Nav links */}
-          <nav style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
+          {/* Nav links - desktop */}
+          <nav className="nav-links-desktop" style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
             <span className="nav-link">Product</span>
             <span className="nav-link">Features</span>
             <span className="nav-link">Pricing</span>
             <span className="nav-link">Docs</span>
+          </nav>
+
+          {/* Nav links - mobile (hidden by default) */}
+          <nav className="nav-links-mobile" style={{ display: 'none', gap: 16, alignItems: 'center' }}>
+            <span className="nav-link" style={{ fontSize: 13 }}>Product</span>
+            <span className="nav-link" style={{ fontSize: 13 }}>Features</span>
+            <span className="nav-link" style={{ fontSize: 13 }}>Pricing</span>
           </nav>
 
           {/* CTAs */}
@@ -304,7 +325,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
       {/* ──────────────────────────────────────────────────────────────
           HERO SECTION
       ────────────────────────────────────────────────────────────── */}
-      <section style={{ position: 'relative', overflow: 'hidden', padding: '80px 40px 0', background: C.bg }}>
+      <section className="hero-section" style={{ position: 'relative', overflow: 'hidden', padding: '80px 40px 0', background: C.bg }}>
 
         {/* Dot grid background */}
         <div style={{
@@ -329,7 +350,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           </div>
 
           {/* Main headline */}
-          <h1 className="hero-fade-2" style={{ fontSize: 70, fontWeight: 900, lineHeight: 1.05, letterSpacing: '-2.5px', color: C.text, margin: '0 0 22px' }}>
+          <h1 className="hero-fade-2 hero-headline" style={{ fontSize: 70, fontWeight: 900, lineHeight: 1.05, letterSpacing: '-2.5px', color: C.text, margin: '0 0 22px' }}>
             Run your entire business
             <br />
             from{' '}
@@ -344,12 +365,12 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           </h1>
 
           {/* Sub-headline */}
-          <p className="hero-fade-3" style={{ fontSize: 19, color: C.textSm, lineHeight: 1.65, margin: '0 auto 38px', maxWidth: 560 }}>
+          <p className="hero-fade-3 hero-subheadline" style={{ fontSize: 19, color: C.textSm, lineHeight: 1.65, margin: '0 auto 38px', maxWidth: 560 }}>
             SOKORA unifies accounting, inventory, HR, and CRM for modern East African businesses — real-time, multi-tenant, and ready in minutes.
           </p>
 
           {/* CTA buttons */}
-          <div className="hero-fade-3" style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+          <div className="hero-fade-3 cta-buttons" style={{ display: 'flex', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
             <button
               style={{ ...btn('primary', 'lg'), boxShadow: '0 4px 24px rgba(99,102,241,0.35)', paddingLeft: 28, paddingRight: 28 }}
               onClick={onGetStarted}
@@ -387,7 +408,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
         </div>
 
         {/* ── Wide perspective dashboard mockup ────────────────────── */}
-        <div className="hero-fade-3" style={{ maxWidth: 1140, margin: '52px auto 0', position: 'relative', zIndex: 1 }}>
+        <div className="hero-fade-3 dashboard-mockup" style={{ maxWidth: 1140, margin: '52px auto 0', position: 'relative', zIndex: 1 }}>
 
           {/* Glow beneath the mockup */}
           <div style={{ position: 'absolute', bottom: -10, left: '50%', transform: 'translateX(-50%)', width: '70%', height: 120, background: `radial-gradient(ellipse, rgba(99,102,241,0.18) 0%, transparent 70%)`, pointerEvents: 'none', zIndex: 0 }} />
@@ -531,7 +552,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           TRUSTED BY STRIP
       ────────────────────────────────────────────────────────────── */}
       <section style={{ background: C.bgAlt, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, padding: '18px 40px' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div className="trusted-by-scroll" style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', gap: 16 }}>
           <span style={{ fontSize: 12, color: C.textMute, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.8px', flexShrink: 0 }}>Trusted by</span>
           <div style={{ flex: 1, height: 1, background: C.border }} />
           {['Retailers', 'Distributors', 'Manufacturers', 'Service Firms', 'Import/Export'].map(name => (
@@ -546,7 +567,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
       {/* ──────────────────────────────────────────────────────────────
           FEATURES
       ────────────────────────────────────────────────────────────── */}
-      <section style={{ padding: '90px 40px', background: C.bg, position: 'relative', overflow: 'hidden' }}>
+      <section className="section-padding" style={{ padding: '90px 40px', background: C.bg, position: 'relative', overflow: 'hidden' }}>
         {/* 3D bg objects */}
         <FloatCube size={64} style={{ top: '5%', right: '2%', opacity: 0.4 }} delay={2} />
         <FloatRing size={200} style={{ bottom: '-60px', right: '-40px', opacity: 0.15 }} delay={0} />
@@ -596,7 +617,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
       {/* ──────────────────────────────────────────────────────────────
           HOW IT WORKS
       ────────────────────────────────────────────────────────────── */}
-      <section style={{ padding: '90px 40px', background: C.bgAlt, borderTop: `1px solid ${C.border}`, position: 'relative', overflow: 'hidden' }}>
+      <section className="section-padding" style={{ padding: '90px 40px', background: C.bgAlt, borderTop: `1px solid ${C.border}`, position: 'relative', overflow: 'hidden' }}>
         {/* 3D bg objects */}
         <FloatCube size={44} style={{ top: '10%', left: '2%', opacity: 0.5 }} delay={1} />
         <FloatDot size={14} style={{ bottom: '15%', left: '6%', opacity: 0.4 }} delay={0} />
@@ -645,7 +666,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
       {/* ──────────────────────────────────────────────────────────────
           STATS — dark indigo strip
       ────────────────────────────────────────────────────────────── */}
-      <section style={{ padding: '70px 40px', background: C.indigo, position: 'relative', overflow: 'hidden' }}>
+      <section className="section-padding" style={{ padding: '70px 40px', background: C.indigo, position: 'relative', overflow: 'hidden' }}>
         {/* Subtle bg geometry */}
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'hidden' }}>
           <div style={{ position: 'absolute', top: -80, right: '10%', width: 400, height: 400, borderRadius: '50%', background: 'rgba(255,255,255,0.04)' }} />
@@ -665,7 +686,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
       {/* ──────────────────────────────────────────────────────────────
           PRICING
       ────────────────────────────────────────────────────────────── */}
-      <section style={{ padding: '90px 40px', background: C.bg, position: 'relative', overflow: 'hidden' }}>
+      <section className="section-padding" style={{ padding: '90px 40px', background: C.bg, position: 'relative', overflow: 'hidden' }}>
         {/* 3D bg objects */}
         <FloatCube size={70} style={{ top: '5%', left: '1%', opacity: 0.35 }} delay={0} />
         <FloatCube size={40} style={{ bottom: '10%', right: '3%', opacity: 0.4 }} delay={2} />
@@ -749,7 +770,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
       {/* ──────────────────────────────────────────────────────────────
           CTA SECTION
       ────────────────────────────────────────────────────────────── */}
-      <section style={{ padding: '90px 40px', background: C.bgAlt, borderTop: `1px solid ${C.border}`, position: 'relative', overflow: 'hidden' }}>
+      <section className="section-padding" style={{ padding: '90px 40px', background: C.bgAlt, borderTop: `1px solid ${C.border}`, position: 'relative', overflow: 'hidden' }}>
         {/* 3D bg objects */}
         <FloatCube size={80} style={{ top: '10%', left: '3%', opacity: 0.4 }} delay={0} />
         <FloatCube size={44} style={{ bottom: '10%', right: '5%', opacity: 0.5 }} delay={3} />
@@ -805,19 +826,11 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
       ────────────────────────────────────────────────────────────── */}
       <footer style={{ background: C.text, color: 'rgba(255,255,255,0.6)', padding: '48px 40px 32px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 40 }}>
+          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 40 }}>
             {/* Brand */}
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
-                <div style={{ width: 30, height: 30, background: C.indigo, borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <svg width="16" height="16" viewBox="0 0 40 40" fill="none">
-                    <path d="M10 26C10 22 13 20 17 20C21 20 23 18 23 14" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
-                    <path d="M17 20C21 20 24 22 27 24C30 26 30 30 27 30" stroke="rgba(255,255,255,0.65)" strokeWidth="3.5" strokeLinecap="round"/>
-                    <circle cx="10" cy="26" r="2.5" fill="white"/>
-                    <circle cx="27" cy="30" r="2.5" fill="rgba(255,255,255,0.65)"/>
-                    <circle cx="23" cy="14" r="2.5" fill="white"/>
-                  </svg>
-                </div>
+                <img src="/icons/icons8-logo.svg" alt="SOKORA Logo" style={{ width: 30, height: 30, borderRadius: 7 }} />
                 <span style={{ fontSize: 16, fontWeight: 800, color: '#fff', letterSpacing: '-0.3px' }}>SOKORA</span>
               </div>
               <p style={{ fontSize: 13, lineHeight: 1.7, maxWidth: 260 }}>Business Operating System for East African companies. Accounting, Inventory, HR, and CRM — all in one.</p>
