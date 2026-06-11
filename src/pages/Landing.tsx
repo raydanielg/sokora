@@ -230,6 +230,9 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           .section-padding { padding: 60px 20px !important; }
           .cta-buttons { flex-direction: column !important; width: 100% !important; }
           .cta-buttons button { width: 100% !important; }
+          .announcement-bar { padding: 12px 16px !important; flex-wrap: wrap !important; }
+          .announcement-text { font-size: 12px !important; flex: 1 !important; }
+          .announcement-cta { display: none !important; }
         }
         @media (max-width: 480px) {
           .hero-headline { font-size: 32px !important; letter-spacing: -1px !important; }
@@ -238,6 +241,8 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           .responsive-header { padding: 0 16px !important; }
           .hero-section { padding: 40px 16px 0 !important; }
           .section-padding { padding: 40px 16px !important; }
+          .announcement-bar { padding: 10px 12px !important; }
+          .announcement-text { font-size: 11px !important; }
         }
       `}</style>
 
@@ -245,7 +250,7 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           ANNOUNCEMENT BAR (Lovable-style notification)
       ────────────────────────────────────────────────────────────── */}
       {announcementVisible && (
-        <div className="toast-enter" style={{
+        <div className="toast-enter announcement-bar" style={{
           background: C.indigo,
           color: '#fff',
           padding: '9px 20px',
@@ -258,8 +263,8 @@ export default function Landing({ onGetStarted, onSignIn }: Props) {
           position: 'relative',
         }}>
           <span style={{ fontSize: 15 }}>✨</span>
-          <span>Introducing <strong>SOKORA 2.0</strong> — Multi-tenant SaaS platform for East African businesses</span>
-          <span style={{ padding: '2px 8px', background: 'rgba(255,255,255,0.18)', borderRadius: 5, fontSize: 12, fontWeight: 700, letterSpacing: '.2px', cursor: 'pointer' }} onClick={onGetStarted}>
+          <span className="announcement-text">Introducing <strong>SOKORA 2.0</strong> — Multi-tenant SaaS platform for East African businesses</span>
+          <span className="announcement-cta" style={{ padding: '2px 8px', background: 'rgba(255,255,255,0.18)', borderRadius: 5, fontSize: 12, fontWeight: 700, letterSpacing: '.2px', cursor: 'pointer' }} onClick={onGetStarted}>
             Get started free →
           </span>
           <button
